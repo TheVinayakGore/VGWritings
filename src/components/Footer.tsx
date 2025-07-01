@@ -1,0 +1,118 @@
+"use client";
+import { motion } from "framer-motion";
+import Link from "next/link";
+import { Instagram, Linkedin } from "react-feather";
+import { FaXTwitter } from "react-icons/fa6";
+import { FiGithub } from "react-icons/fi";
+import { Button } from "./ui/button";
+
+export default function Footer() {
+  const currentYear = new Date().getFullYear();
+  const socialLinks = [
+    { icon: FiGithub, href: "/" },
+    { icon: FaXTwitter, href: "/" },
+    { icon: Instagram, href: "/" },
+    { icon: Linkedin, href: "/" },
+  ];
+
+  const footerLinks = [
+    {
+      title: "Quick Links",
+      links: [
+        { name: "Home", href: "/" },
+        { name: "Blog", href: "/blog" },
+        { name: "About", href: "/about" },
+        { name: "Contact", href: "#contact" },
+      ],
+    },
+    {
+      title: "Legal",
+      links: [
+        { name: "Privacy Policy", href: "/privacy" },
+        { name: "Terms of Service", href: "/terms" },
+        { name: "Cookie Policy", href: "/cookies" },
+      ],
+    },
+    {
+      title: "Resources",
+      links: [
+        { name: "Documentation", href: "/docs" },
+        { name: "API Status", href: "/status" },
+        { name: "Support", href: "/support" },
+      ],
+    },
+  ];
+
+  return (
+    <footer className="bg-background border-t px-4">
+      <div className="container py-12 m-auto w-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+          >
+            <Link href="/" className="flex items-center space-x-2 mb-4">
+              <span className="text-2xl font-bold text-primary">
+                VGWritings
+              </span>
+            </Link>
+            <p className="text-foreground/80 mb-6">
+              A platform for sharing knowledge, stories, and ideas that matter.
+            </p>
+            <div className="flex space-x-4">
+              {socialLinks.map((social, index) => (
+                <motion.div
+                  key={index}
+                  whileHover={{ y: -3 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Button variant="ghost" size="icon" asChild>
+                    <Link href={social.href}>
+                      <social.icon className="size-5" />
+                    </Link>
+                  </Button>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
+          {footerLinks.map((section, index) => (
+            <motion.div
+              key={section.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              viewport={{ once: true }}
+            >
+              <h3 className="text-lg font-semibold mb-4">{section.title}</h3>
+              <ul className="space-y-3">
+                {section.links.map((link) => (
+                  <li key={link.name}>
+                    <Link
+                      href={link.href}
+                      className="text-foreground/70 hover:text-primary transition-colors"
+                    >
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ delay: 0.3 }}
+          viewport={{ once: true }}
+          className="text-sm border-t mt-12 pt-8 text-center text-muted-foreground"
+        >
+          <p>© {currentYear} VGWritings. All rights reserved.</p>
+        </motion.div>
+      </div>
+    </footer>
+  );
+}
