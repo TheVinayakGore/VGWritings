@@ -47,7 +47,7 @@ export default function ShareDialog({
         description: "Blog link has been copied to clipboard",
       });
       setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
+    } catch {
       toast({
         title: "Failed to copy",
         description: "Could not copy link to clipboard",
@@ -128,7 +128,7 @@ export default function ShareDialog({
         <DialogHeader>
           <DialogTitle>Share this blog</DialogTitle>
           <DialogDescription>
-            Share "{title}" with your friends and colleagues
+            Share {`"${title}"`} with your friends and colleagues
           </DialogDescription>
         </DialogHeader>
 
