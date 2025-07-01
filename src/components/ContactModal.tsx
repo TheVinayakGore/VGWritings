@@ -54,18 +54,17 @@ export default function ContactModal() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <button className="py-2 text-sm text-start font-medium transition-colors text-muted-foreground hover:text-primary cursor-pointer flex items-center gap-2">
-          <Mail className="h-4 w-4 md:hidden" />
+        <button className="text-sm font-medium transition-colors hover:text-primary text-muted-foreground focus:text-primary cursor-pointer">
           Contact
         </button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[500px]">
+      <DialogContent className="md:max-w-[600px]">
         <DialogHeader>
           <DialogTitle className="text-2xl">Get in Touch</DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
-            <div className="flex items-center gap-2 text-foreground/80">
+            <div className="flex items-center gap-2 text-muted-foreground">
               <User className="h-4 w-4" />
               <label htmlFor="name">Name</label>
             </div>
@@ -80,7 +79,7 @@ export default function ContactModal() {
           </div>
 
           <div className="space-y-2">
-            <div className="flex items-center gap-2 text-foreground/80">
+            <div className="flex items-center gap-2 text-muted-foreground">
               <Mail className="h-4 w-4" />
               <label htmlFor="email">Email</label>
             </div>
@@ -96,7 +95,7 @@ export default function ContactModal() {
           </div>
 
           <div className="space-y-2">
-            <div className="flex items-center gap-2 text-foreground/80">
+            <div className="flex items-center gap-2 text-muted-foreground">
               <MessageSquare className="h-4 w-4" />
               <label htmlFor="message">Message</label>
             </div>

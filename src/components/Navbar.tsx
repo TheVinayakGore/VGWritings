@@ -4,15 +4,13 @@ import { useTheme } from "next-themes";
 import { Button } from "./ui/button";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion } from "framer-motion";
-import { Moon, Sun, Menu, X } from "react-feather";
+import { Moon, Sun } from "react-feather";
 import ContactModal from "./ContactModal";
 import Image from "next/image";
 
 export default function Navbar() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -32,13 +30,8 @@ export default function Navbar() {
   ];
 
   return (
-    <motion.header
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      className="fixed top-0 z-50 px-4 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
-    >
-      <div className="sm:container flex h-16 items-center justify-between m-auto w-full">
+    <nav className="sticky top-0 z-[100] block w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="container flex p-4 items-center justify-between mx-auto w-full">
         <Link href="/" className="inline-flex items-center gap-2 md:gap-3">
           <Image
             src="/logo.svg"
@@ -58,7 +51,9 @@ export default function Navbar() {
               key={link.name}
               href={link.href}
               className={`text-sm font-medium transition-colors hover:text-primary ${
-                pathname === link.href ? "text-primary" : "text-foreground/60"
+                pathname === link.href
+                  ? "text-primary"
+                  : "text-muted-foreground"
               }`}
             >
               {link.name}
@@ -84,48 +79,37 @@ export default function Navbar() {
               <Sun className="h-5 w-5" />
             )}
           </Button>
-
-          <Button
-            variant="ghost"
-            size="icon"
-            className="md:hidden"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            {mobileMenuOpen ? (
-              <X className="h-5 w-5" />
-            ) : (
-              <Menu className="h-5 w-5" />
-            )}
-          </Button>
         </div>
       </div>
 
-      {/* Mobile menu */}
-      {mobileMenuOpen && (
-        <motion.div
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: "auto" }}
-          exit={{ opacity: 0, height: 0 }}
-          className="md:hidden overflow-hidden"
-        >
-          <div className="container px-4 pb-4 flex flex-col space-y-3">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className={`py-2 text-sm font-medium transition-colors hover:text-primary ${
-                  pathname === link.href ? "text-primary" : "text-foreground/60"
-                }`}
-              >
-                {link.name}
-              </Link>
-            ))}
-            <ContactModal />
-          </div>
-        </motion.div>
-      )}
-    </motion.header>
+      {/* Subnavbar for mobile only */}
+      <div className="sticky top-0 block md:hidden border-dashed border-y w-full">
+        <div className="container mx-auto flex justify-around p-4 w-full">
+          <Link
+            href="/"
+            className={`text-sm font-medium transition-colors hover:text-primary ${
+              pathname === "/" ? "text-primary" : "text-muted-foreground"
+            }`}
+          >
+            Home
+          </Link>
+          <Link
+            href="/blogs"
+            className={`text-sm font-medium transition-colors hover:text-primary ${
+              pathname === "/blogs" ? "text-primary" : "text-muted-foreground"
+            }`}
+          >
+            Blogs
+          </Link>
+          <Link
+            href="/#about"
+            className="text-sm font-medium transition-colors hover:text-primary text-muted-foreground focus:text-primary"
+          >
+            About
+          </Link>
+          <ContactModal />
+        </div>
+      </div>
+    </nav>
   );
 }

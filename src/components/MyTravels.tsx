@@ -57,6 +57,40 @@ const trips = [
       landmarks: 5,
     },
   },
+  {
+    title: "Goa",
+    period: "Dec 22-27, 2023",
+    description:
+      "Relaxing on the sunny beaches and enjoying the vibrant nightlife of Goa.",
+    image: "/trip/04.jpeg",
+    highlights: [
+      "Sunbathed at Baga Beach",
+      "Explored Fort Aguada",
+      "Experienced Goa Carnival",
+    ],
+    stats: {
+      travelers: 5,
+      days: 6,
+      landmarks: 9,
+    },
+  },
+  {
+    title: "Jaipur",
+    period: "Feb 10-14, 2024",
+    description:
+      "A royal journey through the Pink City, exploring forts, palaces, and local bazaars.",
+    image: "/trip/05.jpeg",
+    highlights: [
+      "Visited Amber Fort",
+      "Shopped at Johari Bazaar",
+      "Admired Hawa Mahal",
+    ],
+    stats: {
+      travelers: 3,
+      days: 5,
+      landmarks: 7,
+    },
+  },
 ];
 
 export default function MyTravels() {
@@ -79,7 +113,7 @@ export default function MyTravels() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 lg:lg:grid-cols-2 xl:grid-cols-3 gap-10">
           {trips.map((item, index) => (
             <motion.div
               key={index}
@@ -92,13 +126,13 @@ export default function MyTravels() {
               }}
               className="bg-white dark:bg-zinc-900 rounded-2xl shadow-lg dark:shadow-zinc-800 overflow-hidden flex flex-col transition-transform hover:scale-105 duration-300"
             >
-              <div className="relative w-full h-96">
+              <div className="relative w-full xl:h-96">
                 <Image
                   src={item.image}
                   alt={item.title}
                   width={2000}
                   height={2000}
-                  className="object-cover w-full h-full"
+                  className="object-cover object-top w-full h-full"
                   style={{
                     borderBottomLeftRadius: "1rem",
                     borderBottomRightRadius: "1rem",

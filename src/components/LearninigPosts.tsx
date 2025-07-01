@@ -35,6 +35,46 @@ const learninigPosts = [
     category: "Lifestyle",
     date: "April 28, 2023",
   },
+  {
+    id: 4,
+    title: "Building a Personal Brand Online",
+    description:
+      "Tips and strategies to establish and grow your personal brand in the digital world.",
+    category: "Personal Growth",
+    date: "July 10, 2023",
+  },
+  {
+    id: 5,
+    title: "Effective Time Management for Creators",
+    description:
+      "Master the art of time management to balance creativity and productivity.",
+    category: "Productivity",
+    date: "August 5, 2023",
+  },
+  {
+    id: 6,
+    title: "Travel Diaries: Exploring the Himalayas",
+    description:
+      "A personal account of adventures and lessons learned while trekking in the Himalayas.",
+    category: "Travel",
+    date: "September 12, 2023",
+  },
+  {
+    id: 7,
+    title: "The Science of Habit Formation",
+    description:
+      "Understand how habits are formed and how to build positive routines for success.",
+    category: "Self-Improvement",
+    date: "October 1, 2023",
+  },
+  {
+    id: 8,
+    title: "AI in Everyday Life: Opportunities & Challenges",
+    description:
+      "Explore how artificial intelligence is transforming daily life and what the future holds.",
+    category: "Technology",
+    date: "November 18, 2023",
+  },
 ];
 
 export default function LearninigPosts() {
