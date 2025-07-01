@@ -34,7 +34,9 @@ export function NewsletterSection() {
           viewport={{ once: true }}
           className="max-w-2xl mx-auto text-center"
         >
-          <h2 className="logo text-4xl md:text-6xl font-bold mb-5">Stay Updated</h2>
+          <h2 className="logo text-4xl md:text-6xl font-bold mb-5">
+            Stay Updated
+          </h2>
           <p className="text-lg text-foreground/80 mb-8">
             Subscribe to our newsletter to get the latest articles and updates
             delivered straight to your inbox.
@@ -55,7 +57,11 @@ export function NewsletterSection() {
                 required
               />
             </div>
-            <Button type="submit" size="lg" className="absolute right-0 m-1.5 rounded">
+            <Button
+              type="submit"
+              size="lg"
+              className="absolute right-0 m-[0.32rem] rounded"
+            >
               Subscribe
             </Button>
           </form>

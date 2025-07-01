@@ -6,7 +6,8 @@ const values = [
   {
     icon: BookOpen,
     title: "Knowledge Sharing",
-    description: "We believe in the power of sharing knowledge to empower others.",
+    description:
+      "We believe in the power of sharing knowledge to empower others.",
   },
   {
     icon: PenTool,
@@ -36,7 +37,9 @@ export default function ValuesSection() {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="logo text-4xl md:text-6xl font-bold mb-5">Our Values</h2>
+          <h2 className="logo text-4xl md:text-6xl font-bold mb-5">
+            Our Values
+          </h2>
           <p className="text-lg text-foreground/80 max-w-2xl mx-auto">
             The principles that guide everything we do
           </p>

@@ -16,12 +16,13 @@ export default function AboutSection() {
             viewport={{ once: true }}
             className="lg:w-1/2"
           >
-            <div className="relative aspect-square w-full max-w-2xl mx-auto rounded-2xl overflow-hidden shadow-xl">
+            <div className="relative aspect-square w-full max-w-xl mx-auto rounded-2xl overflow-hidden shadow-xl">
               <Image
                 src="/vinu.jpeg"
                 alt="About VGWritings"
                 width={2000}
                 height={2000}
+                className="object-cover"
               />
             </div>
           </motion.div>
@@ -33,20 +34,21 @@ export default function AboutSection() {
             viewport={{ once: true }}
             className="lg:w-1/2"
           >
-            <h2 className="logo text-4xl md:text-6xl font-bold mb-5">About VGWritings</h2>
+            <h1 className="logo text-4xl md:text-6xl font-bold mb-5">About VGWritings</h1>
             <p className="text-lg text-foreground/80 mb-6">
-              VGWritings was born out of a passion for sharing knowledge and stories that
-              inspire, educate, and entertain. Our platform brings together writers
-              from diverse backgrounds to create a rich tapestry of content.
+              VGWritings was born out of a passion for sharing knowledge and
+              stories that inspire, educate, and entertain. Our platform brings
+              together writers from diverse backgrounds to create a rich
+              tapestry of content.
             </p>
             <p className="text-lg text-foreground/80 mb-6">
-              Whether you are looking for technical insights, creative inspiration,
-              or thought-provoking essays, you will find it here in our growing
-              collection of articles.
+              Whether you are looking for technical insights, creative
+              inspiration, or thought-provoking essays, you will find it here in
+              our growing collection of articles.
             </p>
             <p className="text-lg text-foreground/80 mb-8">
-              Join our community of readers and writers today, and be part of the
-              conversation.
+              Join our community of readers and writers today, and be part of
+              the conversation.
             </p>
             <div className="flex flex-wrap gap-4">
               <Button asChild>

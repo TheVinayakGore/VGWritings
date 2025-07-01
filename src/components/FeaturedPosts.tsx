@@ -51,8 +51,8 @@ export default function FeaturedPosts() {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="logo text-4xl md:text-6xl font-bold mb-5">
-             Learninig Posts
+          <h2 className="text-4xl md:text-6xl font-bold mb-5">
+            Learninig Posts
           </h2>
           <p className="text-lg text-foreground/80 max-w-2xl mx-auto">
             Discover our most popular and recently published articles

@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Marcellus&display=swap');
+/* @import url("https://fonts.googleapis.com/css2?family=Satisfy&display=swap"); */
+/* @import url("https://fonts.googleapis.com/css2?family=Marcellus&display=swap"); */
 
 @import "tailwindcss";
 @import "tw-animate-css";
@@ -116,8 +116,6 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
-
-
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -133,4 +131,22 @@
 
 .writings {
   font-family: "Satisfy", cursive;
+}
+
+@font-face {
+  font-family: "Marcellus";
+  src: url("/fonts/Marcellus-Regular.ttf") format("woff2"),
+    url("/fonts/Marcellus-Regular.ttf") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Satisfy";
+  src: url("/fonts/Satisfy-Regular.ttf") format("woff2"),
+    url("/fonts/Satisfy-Regular.ttf") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
