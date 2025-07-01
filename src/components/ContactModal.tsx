@@ -54,7 +54,8 @@ export default function ContactModal() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <button className="py-2 text-sm font-medium transition-colors text-muted-foreground hover:text-primary cursor-pointer">
+        <button className="py-2 text-sm text-start font-medium transition-colors text-muted-foreground hover:text-primary cursor-pointer flex items-center gap-2">
+          <Mail className="h-4 w-4 md:hidden" />
           Contact
         </button>
       </DialogTrigger>

@@ -15,34 +15,6 @@ export default function Footer() {
     { icon: Linkedin, href: "/" },
   ];
 
-  const footerLinks = [
-    {
-      title: "Quick Links",
-      links: [
-        { name: "Home", href: "/" },
-        { name: "Blog", href: "/blog" },
-        { name: "About", href: "/about" },
-        { name: "Contact", href: "#contact" },
-      ],
-    },
-    {
-      title: "Legal",
-      links: [
-        { name: "Privacy Policy", href: "/privacy" },
-        { name: "Terms of Service", href: "/terms" },
-        { name: "Cookie Policy", href: "/cookies" },
-      ],
-    },
-    {
-      title: "Resources",
-      links: [
-        { name: "Documentation", href: "/docs" },
-        { name: "API Status", href: "/status" },
-        { name: "Support", href: "/support" },
-      ],
-    },
-  ];
-
   return (
     <footer className="bg-background border-t px-4">
       <div className="container py-12 m-auto w-full">
@@ -77,30 +49,6 @@ export default function Footer() {
               ))}
             </div>
           </motion.div>
-
-          {footerLinks.map((section, index) => (
-            <motion.div
-              key={section.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
-            >
-              <h3 className="text-lg font-semibold mb-4">{section.title}</h3>
-              <ul className="space-y-3">
-                {section.links.map((link) => (
-                  <li key={link.name}>
-                    <Link
-                      href={link.href}
-                      className="text-foreground/70 hover:text-primary transition-colors"
-                    >
-                      {link.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          ))}
         </div>
 
         <motion.div

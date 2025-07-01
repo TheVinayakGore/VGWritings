@@ -36,71 +36,69 @@ export default function Navbar() {
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="fixed top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
+      className="fixed top-0 z-50 px-4 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
     >
-      <div className="container flex h-16 px-4 items-center justify-between m-auto w-full">
-        <Link href="/" className="flex items-center space-x-3 w-1/2">
+      <div className="sm:container flex h-16 items-center justify-between m-auto w-full">
+        <Link href="/" className="inline-flex items-center gap-2 md:gap-3">
           <Image
             src="/logo.svg"
             alt="logo"
             width={100}
             height={100}
-            className="size-9 rounded-full"
+            className="size-7 md:size-9 rounded-full"
           />
-          <span className="logo text-2xl font-bold text-primary">
+          <span className="logo text-xl md:text-2xl font-bold text-primary">
             VGWritings
           </span>
         </Link>
 
-        <div className="flex items-center justify-end space-x-3 w-1/2">
-          <div className="hidden md:flex items-center space-x-6">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                className={`text-sm font-medium transition-colors hover:text-primary ${
-                  pathname === link.href ? "text-primary" : "text-foreground/60"
-                }`}
-              >
-                {link.name}
-              </Link>
-            ))}
-            <ContactModal />
-          </div>
-          <div className="flex items-center space-x-3">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={toggleTheme}
-              aria-label="Toggle theme"
+        <div className="hidden md:flex items-center space-x-6">
+          {navLinks.map((link) => (
+            <Link
+              key={link.name}
+              href={link.href}
+              className={`text-sm font-medium transition-colors hover:text-primary ${
+                pathname === link.href ? "text-primary" : "text-foreground/60"
+              }`}
             >
-              {mounted ? (
-                theme === "dark" ? (
-                  <Sun className="h-5 w-5" />
-                ) : (
-                  <Moon className="h-5 w-5" />
-                )
-              ) : (
-                <Sun className="h-5 w-5" />
-              )}
-            </Button>
-
-            <Button
-              variant="ghost"
-              size="icon"
-              className="md:hidden"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label="Toggle menu"
-            >
-              {mobileMenuOpen ? (
-                <X className="h-5 w-5" />
-              ) : (
-                <Menu className="h-5 w-5" />
-              )}
-            </Button>
-          </div>
+              {link.name}
+            </Link>
+          ))}
+          <ContactModal />
         </div>
 
+        <div className="flex items-center">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={toggleTheme}
+            aria-label="Toggle theme"
+          >
+            {mounted ? (
+              theme === "dark" ? (
+                <Sun className="h-5 w-5" />
+              ) : (
+                <Moon className="h-5 w-5" />
+              )
+            ) : (
+              <Sun className="h-5 w-5" />
+            )}
+          </Button>
+
+          <Button
+            variant="ghost"
+            size="icon"
+            className="md:hidden"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {mobileMenuOpen ? (
+              <X className="h-5 w-5" />
+            ) : (
+              <Menu className="h-5 w-5" />
+            )}
+          </Button>
+        </div>
       </div>
 
       {/* Mobile menu */}
