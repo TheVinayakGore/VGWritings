@@ -55,7 +55,7 @@ export default function ContactModal() {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <button className="py-2 text-sm font-medium transition-colors text-muted-foreground hover:text-primary cursor-pointer">
-          Contact Us
+          Contact
         </button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[500px]">
