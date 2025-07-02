@@ -3,16 +3,26 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { Instagram, Linkedin } from "react-feather";
 import { FaXTwitter } from "react-icons/fa6";
-import { FiGithub } from "react-icons/fi";
+import { FiGithub, FiFacebook } from "react-icons/fi";
 import { Button } from "./ui/button";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
   const socialLinks = [
-    { icon: FiGithub, href: "/" },
-    { icon: FaXTwitter, href: "/" },
-    { icon: Instagram, href: "/" },
-    { icon: Linkedin, href: "/" },
+    { icon: FiGithub, href: "https://github.com/TheVinayakGore" },
+    {
+      icon: Linkedin,
+      href: "https://www.linkedin.com/in/vinayak-gore-b85b7922a/",
+    },
+    {
+      icon: Instagram,
+      href: "https://www.instagram.com/vinugoredev/?igsh=cjBrcjNuY21zcWw2",
+    },
+    {
+      icon: FiFacebook,
+      href: "https://www.facebook.com/profile.php?id=61561190855256&mibextid=ZbWKwL",
+    },
+    { icon: FaXTwitter, href: "https://x.com/vinugoredev" },
   ];
 
   return (
@@ -41,7 +51,11 @@ export default function Footer() {
                   whileTap={{ scale: 0.95 }}
                 >
                   <Button variant="ghost" size="icon" asChild>
-                    <Link href={social.href}>
+                    <Link
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       <social.icon className="size-5" />
                     </Link>
                   </Button>

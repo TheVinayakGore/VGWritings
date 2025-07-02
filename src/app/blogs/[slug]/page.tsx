@@ -6,47 +6,52 @@ import Link from "next/link";
 import {
   ArrowLeft,
   Heart,
-  MessageSquare,
   Share2,
   Bookmark,
   Clock,
-  User,
+  Eye,
+  Calendar,
+  CheckCircle,
 } from "react-feather";
 import CodeBlock from "@/components/CodeBlock";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/components/ui/use-toast";
+import { Badge } from "@/components/ui/badge";
 import ShareDialog from "@/components/ShareDialog";
+import TableOfContents from "@/components/TableOfContents";
+import ReadingProgressBar from "@/components/ReadingProgressBar";
+import NewsletterSignup from "@/components/NewsletterSignup";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { MdOutlineArrowRightAlt } from "react-icons/md";
 
-// Mock blog data - in a real app, this would come from a database
 const blogData = {
   "understanding-react-server-components": {
     id: 1,
     title: "Understanding React Server Components",
     description:
       "A deep dive into React Server Components and how they change the way we build web apps.",
-    date: "2024-06-01",
+    date: "June 1, 2024",
     readTime: "8 min read",
     cover: "/card.png",
-    author: {
-      name: "Sarah Johnson",
-      avatar: "/avatar1.jpg",
-      bio: "Senior React Developer at TechCorp",
-    },
     stats: {
       likes: 124,
-      comments: 28,
-      shares: 45,
+      views: 2560,
     },
     tags: ["React", "Next.js", "Performance"],
     content: `
-# Understanding React Server Components
+# 🚀 Understanding React Server Components
 
 React Server Components (RSC) represent a paradigm shift in how we build React applications. They allow us to render components on the server and send the result to the client, reducing the JavaScript bundle size and improving performance.
 
-## What are Server Components?
+## 🤔 What are Server Components?
 
 Server Components are React components that run exclusively on the server. They can:
 
@@ -55,14 +60,14 @@ Server Components are React components that run exclusively on the server. They 
 - Reduce client-side JavaScript
 - Improve initial page load performance
 
-## Key Benefits
+## 🌟 Key Benefits
 
-1. **Reduced Bundle Size**: Server components don't ship JavaScript to the client
-2. **Better Performance**: Faster initial page loads
-3. **Enhanced Security**: Sensitive data stays on the server
-4. **Improved SEO**: Better server-side rendering
+1. Reduced Bundle Size: Server components don't ship JavaScript to the client
+2. Better Performance: Faster initial page loads
+3. Enhanced Security: Sensitive data stays on the server
+4. Improved SEO: Better server-side rendering
 
-## Example Implementation
+## 🛠️ Example Implementation
 
 Here's a simple example of a server component:
 
@@ -84,113 +89,203 @@ async function ServerComponent() {
 }
 \`\`\`
 
-## Client vs Server Components
+## 🔄 Client vs Server Components
 
 | Feature | Client Component | Server Component |
-|---------|------------------|------------------|
 | JavaScript | Sent to client | Stays on server |
 | Interactivity | Full | Limited |
 | Data fetching | Client-side | Server-side |
 | Bundle size | Larger | Smaller |
 
-## Best Practices
+## 💡 Best Practices
 
-1. **Use Server Components by default**
-2. **Add "use client" only when needed**
-3. **Keep interactive parts as client components**
-4. **Leverage server-side data fetching**
+1. Use Server Components by default
+2. Add "use client" only when needed
+3. Keep interactive parts as client components
+4. Leverage server-side data fetching
 
-## Conclusion
+## 🎯 Conclusion
 
 React Server Components offer a powerful way to build more efficient React applications. By understanding when and how to use them, you can create faster, more secure web applications.
 
 For more information, check out the [official React documentation](https://react.dev).
     `,
+    images: ["/trip/01.jpeg", "/trip/02.jpeg", "/trip/03.jpeg"],
   },
-  "nextjs-14-whats-new": {
+  "mastering-javascript-closures": {
     id: 2,
-    title: "Next.js 14: What's New?",
+    title: "Mastering JavaScript Closures",
     description:
-      "Explore the latest features and improvements in Next.js 14 for modern web development.",
-    date: "2024-05-20",
+      "A comprehensive guide to understanding and using closures in JavaScript.",
+    date: "May 15, 2024",
     readTime: "6 min read",
-    cover: "/card.png",
-    author: {
-      name: "Michael Chen",
-      avatar: "/avatar2.jpg",
-      bio: "Next.js Expert and Technical Writer",
-    },
+    cover: "/trip/01.jpeg",
     stats: {
-      likes: 89,
-      comments: 15,
-      shares: 32,
+      likes: 98,
+      views: 1800,
     },
-    tags: ["Next.js", "React", "Web Development"],
+    tags: ["JavaScript", "Closures", "Fundamentals"],
     content: `
-# Next.js 14: What's New?
+# 🧠 Mastering JavaScript Closures
 
-Next.js 14 brings significant improvements to performance, developer experience, and the overall React ecosystem. Let's explore the key features and changes.
+Closures are a fundamental concept in JavaScript that every developer should understand. They allow functions to access variables from an enclosing scope, even after that scope has closed.
 
-## Major Features
+## ❓ What is a Closure?
 
-### 1. Improved Performance
+A closure is created when a function is defined inside another function, allowing the inner function to access the outer function's variables.
 
-Next.js 14 introduces several performance optimizations:
-
-- **Faster builds** with Turbopack
-- **Enhanced caching** strategies
-- **Better tree shaking** for smaller bundles
-
-### 2. Enhanced Developer Experience
-
-The development experience has been significantly improved:
-
-\`\`\`bash
-# Install Next.js 14
-npm install next@14 react@18 react-dom@18
+\`\`\`javascript
+function outer() {
+  let count = 0;
+  function inner() {
+    count++;
+    return count;
+  }
+  return inner;
+}
+const counter = outer();
+console.log(counter()); // 1
+console.log(counter()); // 2
 \`\`\`
 
-### 3. New App Router Features
+## 💡 Why Use Closures?
 
-The App Router now supports:
+- Data privacy
+- Function factories
+- Maintaining state
 
-- **Partial Prerendering** (Preview)
-- **Improved Server Actions**
-- **Better error handling**
+## ⚠️ Common Pitfalls
 
-## Code Examples
+1. Unintended variable sharing in loops
+2. Memory leaks if not careful
 
-Here's how to use some new features:
+## 🎯 Conclusion
 
-\`\`\`jsx
-// app/page.jsx
-import { Suspense } from 'react';
+Closures are powerful but can be tricky. Practice using them to fully understand their behavior!`,
+    images: [],
+  },
+  "css-grid-vs-flexbox": {
+    id: 3,
+    title: "CSS Grid vs Flexbox: When to Use Which?",
+    description:
+      "A practical comparison of CSS Grid and Flexbox for modern web layouts.",
+    date: "April 28, 2024",
+    readTime: "7 min read",
+    cover: "/trip/02.jpeg",
+    stats: {
+      likes: 112,
+      views: 2100,
+    },
+    tags: ["CSS", "Grid", "Flexbox"],
+    content: `
+# 🎨 CSS Grid vs Flexbox: When to Use Which?
 
-export default function Page() {
-  return (
-    <div>
-      <h1>Welcome to Next.js 14</h1>
-      <Suspense fallback={<div>Loading...</div>}>
-        <SlowComponent />
-      </Suspense>
-    </div>
-  );
+CSS Grid and Flexbox are two powerful layout systems in CSS. Knowing when to use each can help you build responsive and maintainable layouts.
+
+## 🟩 CSS Grid
+
+- Two-dimensional layout
+- Great for complex grids
+- Explicit placement of items
+
+## ➡️ Flexbox
+
+- One-dimensional layout
+- Best for linear arrangements
+- Simple alignment and distribution
+
+## 🏗️ Example: Grid
+
+\`\`\`css
+grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
 }
 \`\`\`
 
-## Migration Guide
+## 🧩 Example: Flexbox
 
-To migrate from Next.js 13:
+\`\`\`css
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+}
+\`\`\`
 
-1. Update dependencies
-2. Review breaking changes
-3. Test thoroughly
-4. Deploy gradually
+## 🤔 When to Use Which?
 
-## Conclusion
+- Use Grid for overall page layout
+- Use Flexbox for components and small UI elements
 
-Next.js 14 represents a significant step forward in the React ecosystem, offering better performance and developer experience.
-    `,
+## 🎯 Conclusion
+
+Both Grid and Flexbox are essential tools. Choose the right one based on your layout needs!`,
+    images: ["/trip/04.jpeg", "/trip/05.jpeg"],
+  },
+  "unaccepted-mumbai-trip": {
+    id: 4,
+    title: "Unaccepted Mumbai Trip",
+    description:
+      "A spontaneous and unforgettable journey through the heart of Mumbai, filled with surprises, street food, and city lights.",
+    date: "July 10, 2024",
+    readTime: "10 min read",
+    cover: "/trip/03.jpeg",
+    stats: {
+      likes: 87,
+      views: 1420,
+    },
+    tags: ["Travel", "Mumbai", "Adventure", "India"],
+    images: [
+      "/trip/01.jpeg",
+      "/trip/02.jpeg",
+      "/trip/03.jpeg",
+      "/trip/04.jpeg",
+      "/trip/05.jpeg",
+    ],
+    content: `
+# 🏙️ Unaccepted Mumbai Trip
+
+Sometimes the best adventures are the ones you never planned. My recent trip to Mumbai was exactly that—a spontaneous escape that turned into a whirlwind of discovery, flavors, and memories.
+
+[key-moments]
+
+## 🚆 The Unexpected Departure
+
+It all started with a late-night call from a friend: "Let's go to Mumbai tomorrow!" With barely any time to pack, we hopped on the first available train. The excitement of an unplanned journey was palpable as the city lights faded and the tracks hummed beneath us.
+
+## 🌅 Sunrise at Marine Drive
+
+We arrived in Mumbai just as the sun was rising. The first stop? Marine Drive. The cool breeze, the sound of waves, and the golden light made for a magical welcome. We sat on the promenade, sipping chai from a street vendor, watching the city wake up.
+
+## 🍲 Street Food Extravaganza
+
+Mumbai is a food lover's paradise. From spicy vada pav at a bustling corner stall to sweet jalebis in a crowded market, every bite was an explosion of flavor. We wandered through the lanes of Mohammad Ali Road, sampling kebabs, pav bhaji, and more.
+
+- Vada Pav at Dadar
+- Pav Bhaji at Chowpatty
+- Jalebi at CST
+- Kebabs at Mohammad Ali Road
+- Cutting Chai everywhere!
+
+## 🕌 Gateway of India & Colaba Causeway
+
+No trip to Mumbai is complete without visiting the Gateway of India. The monument stood tall against the blue sky, surrounded by tourists and pigeons. We strolled down Colaba Causeway, picking up quirky souvenirs and chatting with local shopkeepers.
+
+## 🚇 Local Train Adventures
+
+Traveling by Mumbai's local trains is an experience in itself. The rush, the crowd, the energy—it's the lifeblood of the city. We squeezed into a compartment, made new friends, and even got travel tips from daily commuters.
+
+## 🌃 Nightlife & Reflections
+
+As night fell, we explored Bandra's vibrant streets, enjoyed live music at a cozy café, and ended the day with a peaceful walk along Carter Road. Mumbai's energy is infectious, and its spirit stays with you long after you leave.
+
+## 🎯 Conclusion
+
+The Unaccepted Mumbai Trip taught me that sometimes, the best memories come from the journeys you never expected to take. Mumbai, with its chaos and charm, welcomed us with open arms and left us craving more.
+
+If you ever get a chance to visit, say yes—even if you haven't planned a thing!`,
   },
 };
 
@@ -201,20 +296,32 @@ export default function BlogPage() {
   const [liked, setLiked] = useState(false);
   const [likes, setLikes] = useState(0);
   const [bookmarked, setBookmarked] = useState(false);
-  const [showFloatingShare, setShowFloatingShare] = useState(false);
+  const [showFloatingActions, setShowFloatingActions] = useState(false);
+  const [tocItems, setTocItems] = useState<
+    { id: string; text: string; level: number }[]
+  >([]);
 
   const blog = blogData[slug as keyof typeof blogData];
 
   useEffect(() => {
     if (blog) {
       setLikes(blog.stats.likes);
+      // Extract headings for TOC
+      const headings = Array.from(
+        document.querySelectorAll("h1, h2, h3, h4, h5, h6")
+      ).map((heading) => ({
+        id: heading.id,
+        text: heading.textContent || "",
+        level: parseInt(heading.tagName.substring(1)),
+      }));
+      setTocItems(headings);
     }
   }, [blog]);
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
-      setShowFloatingShare(scrollY > 300);
+      setShowFloatingActions(scrollY > 300);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -241,6 +348,10 @@ export default function BlogPage() {
   const handleLike = () => {
     setLiked(!liked);
     setLikes(liked ? likes - 1 : likes + 1);
+    toast({
+      title: liked ? "Removed like" : "Liked post",
+      description: liked ? "You unliked this post" : "You liked this post!",
+    });
   };
 
   const handleBookmark = () => {
@@ -256,214 +367,333 @@ export default function BlogPage() {
   const currentUrl = typeof window !== "undefined" ? window.location.href : "";
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      className="container mx-auto py-10 px-4"
-    >
-      <div className="max-w-5xl mx-auto">
-        <motion.div whileHover={{ x: -5 }}>
-          <Link
-            href="/blogs"
-            className="inline-flex items-center text-primary hover:underline mb-6"
-          >
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to blogs
-          </Link>
-        </motion.div>
-
-        <motion.div
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.1 }}
-          className="overflow-hidden"
-        >
-          {/* Cover Image */}
-          <div className="relative h-auto w-full">
-            <Image
-              src={blog.cover}
-              alt={blog.title}
-              width={2000}
-              height={2000}
-              className="h-auto rounded-xl"
-              priority
-            />
-          </div>
-
-          {/* Header Section */}
-          <div className="pt-10">
-            <div className="flex flex-wrap gap-2 mb-4">
-              {blog.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="px-3 py-1 text-xs rounded-full bg-primary/10 text-primary"
+    <>
+      <ReadingProgressBar />
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="flex items-center justify-center px-4 sm:px-10 lg:px-20 m-auto w-full"
+      >
+        <div className="grid grid-cols-1 lg:grid-cols-12 container justify-center m-auto gap-16 mt-3 w-full">
+          {/* Table of Contents - Desktop */}
+          <div className="hidden lg:block lg:col-span-3">
+            <div className="sticky top-20 pb-5">
+              <motion.div whileHover={{ x: -5 }} className="py-3">
+                <Link
+                  href="/blogs"
+                  className="inline-flex items-center text-primary hover:underline"
                 >
-                  {tag}
-                </span>
-              ))}
-            </div>
-
-            <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
-              {blog.title}
-            </h1>
-
-            <div className="flex items-center gap-4 text-muted-foreground">
-              <div className="flex items-center gap-2">
-                <Clock className="w-4 h-4" />
-                <span>{blog.readTime}</span>
-              </div>
-              <span>•</span>
-              <span>{blog.date}</span>
+                  <ArrowLeft className="w-4 h-4 mr-2" />
+                  Back to blogs
+                </Link>
+              </motion.div>
+              <TableOfContents items={tocItems} />
             </div>
           </div>
 
-          <Separator className="mb-6" />
+          {/* Main Content */}
+          <div className="lg:col-span-9">
+            <motion.div
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.1 }}
+            >
+              {/* Article Header */}
+              <header className="mb-10">
+                <Badge
+                  variant="outline"
+                  className="flex flex-wrap items-center justify-start gap-2 p-3 mb-6 overflow-auto"
+                >
+                  <span className="rounded-full text-xl leading-none font-bold px-3">
+                    ► TAGS
+                  </span>
+                  {blog.tags.map((tag) => (
+                    <Badge
+                      key={tag}
+                      className="bg-primary rounded text-base p-1 px-4"
+                    >
+                      {tag}
+                    </Badge>
+                  ))}
+                </Badge>
 
-          {/* Content Section */}
-          <div className="px-6">
-            <div className="flex items-center gap-4 mb-8">
-              <Avatar>
-                <AvatarImage src={blog.author.avatar} />
-                <AvatarFallback>{blog.author.name.charAt(0)}</AvatarFallback>
-              </Avatar>
-              <div>
-                <p className="font-medium">{blog.author.name}</p>
-                <p className="text-sm text-muted-foreground">
-                  {blog.author.bio}
+                <h1 className="logo text-3xl md:text-4xl lg:text-5xl tracking-wide mb-4">
+                  {blog.title}
+                </h1>
+
+                <p className="text-lg text-muted-foreground mb-6">
+                  {blog.description}
                 </p>
-              </div>
-            </div>
 
-            <BlogContent content={blog.content} />
-          </div>
+                <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                  <div className="flex items-center gap-2">
+                    <Calendar className="h-4 w-4" />
+                    <span>{blog.date}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Clock className="h-4 w-4" />
+                    <span>{blog.readTime}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Eye className="h-4 w-4" />
+                    <span>{blog.stats.views.toLocaleString()} views</span>
+                  </div>
+                </div>
+              </header>
 
-          {/* Footer Section */}
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-4 p-6 border rounded-2xl">
-            <div className="flex items-center gap-4">
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={handleLike}
-                className={`flex items-center gap-2 ${
-                  liked ? "text-red-500" : ""
-                }`}
+              {/* Featured Image */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                className="rounded-xl border overflow-hidden shadow-lg"
               >
-                <Heart className={`w-4 h-4 ${liked ? "fill-current" : ""}`} />
-                <span>{likes}</span>
-              </Button>
+                <Image
+                  src={blog.cover}
+                  alt={blog.title}
+                  width={1600}
+                  height={900}
+                  className="w-full h-auto object-cover"
+                  priority
+                />
+              </motion.div>
 
-              <Button
-                variant="ghost"
-                size="sm"
-                className="flex items-center gap-2"
-              >
-                <MessageSquare className="w-4 h-4" />
-                <span>{blog.stats.comments}</span>
-              </Button>
+              {/* Article Content */}
+              <article className="prose prose-lg max-w-none dark:prose-invert prose-headings:font-semibold prose-a:text-primary hover:prose-a:text-primary/80 prose-code:before:hidden prose-code:after:hidden prose-code:bg-muted prose-code:px-2 prose-code:py-1 prose-code:rounded prose-code:text-sm">
+                <BlogContent
+                  content={blog.content}
+                  images={blog.images || []}
+                />
+              </article>
 
-              <ShareDialog
-                title={blog.title}
-                description={blog.description}
-                url={currentUrl}
-                trigger={
+              {/* Article Footer */}
+              <footer className="mt-16 border-y py-8">
+                <div className="flex flex-row justify-center sm:justify-between items-center gap-3">
+                  <div className="flex items-center gap-4">
+                    <Button
+                      variant={liked ? "default" : "outline"}
+                      size="sm"
+                      onClick={handleLike}
+                      className="flex items-center gap-2"
+                    >
+                      <Heart
+                        className={`w-4 h-4 ${liked ? "fill-current" : ""}`}
+                      />
+                      <span>{likes} Likes</span>
+                    </Button>
+
+                    <ShareDialog
+                      title={blog.title}
+                      description={blog.description}
+                      url={currentUrl}
+                      trigger={
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="flex items-center gap-2"
+                        >
+                          <Share2 className="w-4 h-4" />
+                          <span>Share</span>
+                        </Button>
+                      }
+                    />
+                  </div>
+
                   <Button
-                    variant="ghost"
+                    variant={bookmarked ? "default" : "outline"}
                     size="sm"
+                    onClick={handleBookmark}
                     className="flex items-center gap-2"
                   >
-                    <Share2 className="w-4 h-4" />
-                    <span>{blog.stats.shares}</span>
+                    <Bookmark
+                      className={`w-4 h-4 ${bookmarked ? "fill-current" : ""}`}
+                    />
+                    <span>{bookmarked ? "Saved" : "Save"}</span>
                   </Button>
-                }
-              />
+                </div>
+              </footer>
+            </motion.div>
+
+            {/* Newsletter Signup */}
+            <div className="my-10">
+              <NewsletterSignup />
             </div>
 
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={handleBookmark}
-              className={`flex items-center gap-2 ${
-                bookmarked ? "text-primary" : ""
-              }`}
-            >
-              <Bookmark
-                className={`w-4 h-4 ${bookmarked ? "fill-current" : ""}`}
-              />
-              <span>{bookmarked ? "Saved" : "Save"}</span>
-            </Button>
+            {/* Related Articles */}
+            <section className="mb-16">
+              <h2 className="logo text-2xl md:text-4xl font-bold mb-5 md:mb-10">
+                🚀{" "}
+                <span className="underline underline-offset-8">
+                  More articles you might like
+                </span>
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
+                {Object.entries(blogData)
+                  .filter(([key]) => key !== slug)
+                  .map(([key, post]) => (
+                    <motion.div
+                      key={key}
+                      whileHover={{ y: -5 }}
+                      className="bg-background border rounded-lg overflow-hidden hover:shadow-lg transition-shadow"
+                    >
+                      <Link href={`/blogs/${key}`} className="block">
+                        <div className="relative h-60 md:h-76 w-full">
+                          <Image
+                            src={post.cover}
+                            alt={post.title}
+                            fill
+                            className="object-cover object-top"
+                          />
+                        </div>
+                        <div className="p-4 sm:p-5">
+                          <div className="flex flex-wrap gap-2 mb-3">
+                            {post.tags.slice(0, 2).map((tag) => (
+                              <Badge
+                                key={tag}
+                                className="bg-primary rounded-full p-1 px-3"
+                              >
+                                {tag}
+                              </Badge>
+                            ))}
+                          </div>
+                          <h3 className="logo text-xl font-bold mb-2">
+                            {post.title}
+                          </h3>
+                          <p className="text-muted-foreground line-clamp-2 mb-4">
+                            {post.description}
+                          </p>
+                          <div className="flex items-center gap-4 text-xs sm:text-sm text-muted-foreground">
+                            <div className="flex items-center gap-2">
+                              <Calendar className="h-3 sm:h-4 w-3 sm:w-4" />
+                              <span>{post.date}</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <Clock className="h-3 sm:h-4 w-3 sm:w-4" />
+                              <span>{post.readTime}</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <Eye className="h-3 sm:h-4 w-3 sm:w-4" />
+                              <span>
+                                {post.stats.views.toLocaleString()} views
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </Link>
+                    </motion.div>
+                  ))
+                  .slice(0, 6)}
+              </div>
+              <Link href="/blogs">
+                <Button size="lg" className="flex items-center gap-3 my-5">
+                  <span>Explore more Blogs</span> <MdOutlineArrowRightAlt />
+                </Button>
+              </Link>
+            </section>
           </div>
-        </motion.div>
+        </div>
+      </motion.div>
 
-        {/* Related Posts Section */}
+      {/* Floating Action Buttons */}
+      {showFloatingActions && (
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          className="mt-12"
+          exit={{ opacity: 0, y: 20 }}
+          className="fixed bottom-6 right-6 z-50 flex flex-col gap-3"
         >
-          <h3 className="text-xl font-bold mb-6">More from VGWritings</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {Object.entries(blogData)
-              .filter(([key]) => key !== slug)
-              .map(([key, post]) => (
-                <motion.div
-                  key={key}
-                  whileHover={{ y: -5 }}
-                  className="bg-background border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow"
-                >
-                  <Link href={`/blogs/${key}`} className="block">
-                    <div className="relative h-40 w-full">
-                      <Image
-                        src={post.cover}
-                        alt={post.title}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                    <div className="p-4">
-                      <h4 className="font-bold mb-2">{post.title}</h4>
-                      <p className="text-sm text-muted-foreground line-clamp-2">
-                        {post.description}
-                      </p>
-                      <div className="flex items-center gap-2 mt-3">
-                        <User className="w-4 h-4 text-muted-foreground" />
-                        <span className="text-sm text-muted-foreground">
-                          {post.author.name}
-                        </span>
-                      </div>
-                    </div>
-                  </Link>
-                </motion.div>
-              ))}
-          </div>
-        </motion.div>
-
-        {/* Floating Share Button */}
-        {showFloatingShare && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.8 }}
-            className="fixed bottom-6 right-6 z-50"
+          <ShareDialog
+            title={blog.title}
+            description={blog.description}
+            url={currentUrl}
+            trigger={
+              <Button
+                size="icon"
+                className="rounded-full shadow-lg size-12 bg-background hover:bg-muted"
+                variant="outline"
+              >
+                <Share2 className="size-5" />
+              </Button>
+            }
+          />
+          <Button
+            size="icon"
+            className="rounded-full shadow-lg size-12"
+            onClick={handleLike}
           >
-            <ShareDialog
-              title={blog.title}
-              description={blog.description}
-              url={currentUrl}
-              trigger={
-                <Button size="icon" className="rounded-full shadow-lg size-12">
-                  <Share2 className="size-5" />
-                </Button>
-              }
-            />
-          </motion.div>
-        )}
-      </div>
-    </motion.div>
+            <Heart className={`size-5 ${liked ? "fill-current" : ""}`} />
+          </Button>
+        </motion.div>
+      )}
+    </>
   );
 }
 
-function BlogContent({ content }: { content: string }) {
+function KeyMoments({ images }: { images: string[] }) {
+  const [open, setOpen] = useState(false);
+  const [selected, setSelected] = useState<string | null>(null);
+
+  if (!Array.isArray(images) || images.length === 0) return null;
+
+  return (
+    <section className="mb-8 overflow-x-auto w-full">
+      <h3 className="font-semibold text-lg mb-2"># Key Moments :</h3>
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogTrigger
+          className="flex gap-5 overflow-x-auto p-5 md:p-10 md:pt-5 scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-primary/30"
+          asChild
+        >
+          <div>
+            {images.map((img, idx) => (
+              <button
+                key={img + idx}
+                type="button"
+                className="shrink-0 w-32 md:w-56 h-auto p-2 border rounded-lg hover:shadow-lg transition-all hover:scale-105 duration-300 overflow-hidden bg-muted cursor-pointer"
+                onClick={() => {
+                  setSelected(img);
+                  setOpen(true);
+                }}
+              >
+                <Image
+                  src={img}
+                  alt={`Key moment ${idx + 1}`}
+                  width={2000}
+                  height={2000}
+                  className="object-cover rounded-lg w-full h-full"
+                />
+              </button>
+            ))}
+          </div>
+        </DialogTrigger>
+        <DialogContent className="mt-16 md:mt-10 max-h-[80vh] w-full overflow-auto">
+          <DialogHeader>
+            <DialogTitle>Captured moments</DialogTitle>
+            <DialogDescription>
+              A memorable moment from the journey.
+            </DialogDescription>
+          </DialogHeader>
+          {selected && (
+            <Image
+              src={selected}
+              alt="Large key moment"
+              width={1200}
+              height={800}
+              className="rounded-lg w-full h-full"
+            />
+          )}
+        </DialogContent>
+      </Dialog>
+    </section>
+  );
+}
+
+function BlogContent({
+  content,
+  images,
+}: {
+  content: string;
+  images: string[];
+}) {
   const formatContent = (content: string) => {
     const lines = content.split("\n");
     const elements: React.ReactNode[] = [];
@@ -472,66 +702,63 @@ function BlogContent({ content }: { content: string }) {
     while (i < lines.length) {
       const line = lines[i];
 
+      // Key Moments shortcode
+      if (line.trim() === "[key-moments]") {
+        elements.push(<KeyMoments key={`key-moments-${i}`} images={images} />);
+        i++;
+        continue;
+      }
+
       // Headings
       if (line.startsWith("# ")) {
         elements.push(
-          <motion.h1
+          <h1
             key={i}
-            className="text-3xl font-bold mt-12 mb-6 scroll-m-20"
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
+            id={line.substring(2).toLowerCase().replace(/\s+/g, "-")}
+            className="text-3xl font-bold mt-5 scroll-m-20"
           >
             {line.substring(2)}
-          </motion.h1>
+          </h1>
         );
       } else if (line.startsWith("## ")) {
         elements.push(
-          <motion.h2
+          <h2
             key={i}
-            className="text-2xl font-bold mt-10 mb-4 scroll-m-20"
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
+            id={line.substring(3).toLowerCase().replace(/\s+/g, "-")}
+            className="text-2xl font-bold scroll-m-20"
           >
             {line.substring(3)}
-          </motion.h2>
+          </h2>
         );
       } else if (line.startsWith("### ")) {
         elements.push(
-          <motion.h3
+          <h3
             key={i}
-            className="text-xl font-bold mt-8 mb-3 scroll-m-20"
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
+            id={line.substring(4).toLowerCase().replace(/\s+/g, "-")}
+            className="text-xl font-bold scroll-m-20"
           >
             {line.substring(4)}
-          </motion.h3>
+          </h3>
         );
       } else if (line.startsWith("#### ")) {
         elements.push(
-          <motion.h4
+          <h4
             key={i}
-            className="text-lg font-bold mt-6 mb-2 scroll-m-20"
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
+            id={line.substring(5).toLowerCase().replace(/\s+/g, "-")}
+            className="text-lg font-bold scroll-m-20"
           >
             {line.substring(5)}
-          </motion.h4>
+          </h4>
         );
       } else if (line.startsWith("##### ")) {
         elements.push(
-          <motion.h5
+          <h5
             key={i}
-            className="text-base font-bold mt-4 mb-1 scroll-m-20"
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
+            id={line.substring(6).toLowerCase().replace(/\s+/g, "-")}
+            className="text-base font-bold scroll-m-20"
           >
             {line.substring(6)}
-          </motion.h5>
+          </h5>
         );
       }
       // Code blocks
@@ -546,86 +773,69 @@ function BlogContent({ content }: { content: string }) {
         }
 
         elements.push(
-          <motion.div
-            key={i}
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true, margin: "-50px" }}
-            className="my-6"
-          >
+          <div key={i} className="">
             <CodeBlock language={language || "javascript"}>
               {codeContent.trim()}
             </CodeBlock>
-          </motion.div>
+          </div>
         );
       }
       // Lists
       else if (line.startsWith("- ")) {
         const listItems = [
-          <motion.li
-            key={i}
-            className="ml-4 mb-1"
-            initial={{ opacity: 0, x: -10 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
+          <li
+            key={`li-${i}-${line.substring(2, 10)}`}
+            className="ml-4 mb-1 flex items-center gap-2"
           >
+            <CheckCircle className="w-4 h-4 text-green-500 inline-block" />
             {line.substring(2)}
-          </motion.li>,
+          </li>,
         ];
         i++;
 
         while (i < lines.length && lines[i].startsWith("- ")) {
           listItems.push(
-            <motion.li
-              key={i}
-              className="ml-4 mb-1"
-              initial={{ opacity: 0, x: -10 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
+            <li
+              key={`li-${i}-${lines[i].substring(2, 10)}`}
+              className="ml-4 mb-1 flex items-center gap-2"
             >
+              <CheckCircle className="w-4 h-4 text-green-500 inline-block" />
               {lines[i].substring(2)}
-            </motion.li>
+            </li>
           );
           i++;
         }
 
         elements.push(
-          <ul key={`ul-${i}`} className="mb-6 pl-4 list-disc">
+          <ul key={`ul-${i}-${listItems.length}`} className="pl-4 list-disc">
             {listItems}
           </ul>
         );
         continue;
       } else if (line.startsWith("1. ")) {
         const listItems = [
-          <motion.li
-            key={i}
-            className="ml-4 mb-1"
-            initial={{ opacity: 0, x: -10 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-          >
+          <li key={`oli-${i}-${line.substring(3, 10)}`} className="ml-4 mb-1">
             {line.substring(3)}
-          </motion.li>,
+          </li>,
         ];
         i++;
 
         while (i < lines.length && /^\d+\.\s/.test(lines[i])) {
           listItems.push(
-            <motion.li
-              key={i}
+            <li
+              key={`oli-${i}-${lines[i]
+                .replace(/^\d+\.\s/, "")
+                .substring(0, 10)}`}
               className="ml-4 mb-1"
-              initial={{ opacity: 0, x: -10 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
             >
               {lines[i].replace(/^\d+\.\s/, "")}
-            </motion.li>
+            </li>
           );
           i++;
         }
 
         elements.push(
-          <ol key={`ol-${i}`} className="mb-6 pl-4 list-decimal">
+          <ol key={`ol-${i}-${listItems.length}`} className="pl-4 list-decimal">
             {listItems}
           </ol>
         );
@@ -640,18 +850,15 @@ function BlogContent({ content }: { content: string }) {
         const linkMatch = line.match(/\[([^\]]+)\]\(([^)]+)\)/);
         if (linkMatch) {
           elements.push(
-            <motion.a
-              key={i}
+            <Link
+              key={`a-${i}-${linkMatch[2]}`}
               href={linkMatch[2]}
               className="text-primary hover:underline font-medium"
               target="_blank"
               rel="noopener noreferrer"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true, margin: "-50px" }}
             >
               {linkMatch[1]}
-            </motion.a>
+            </Link>
           );
         }
       }
@@ -663,15 +870,12 @@ function BlogContent({ content }: { content: string }) {
         if (isHeader) {
           const tableRows = [];
           const headerCells = cells.map((cell, cellIndex) => (
-            <motion.th
+            <th
               key={cellIndex}
               className="border px-4 py-2 bg-muted font-semibold"
-              initial={{ opacity: 0, y: 5 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
             >
               {cell.trim()}
-            </motion.th>
+            </th>
           ));
           tableRows.push(<tr key={`header-${i}`}>{headerCells}</tr>);
 
@@ -683,49 +887,36 @@ function BlogContent({ content }: { content: string }) {
           ) {
             const rowCells = lines[i].split("|").filter((cell) => cell.trim());
             const dataCells = rowCells.map((cell, cellIndex) => (
-              <motion.td
-                key={cellIndex}
-                className="border px-4 py-2"
-                initial={{ opacity: 0, y: 5 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-              >
+              <td key={cellIndex} className="border px-4 py-2">
                 {cell.trim()}
-              </motion.td>
+              </td>
             ));
             tableRows.push(<tr key={`row-${i}`}>{dataCells}</tr>);
             i++;
           }
 
           elements.push(
-            <motion.div
-              key={`table-${i}`}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true, margin: "-50px" }}
-              className="my-6 overflow-x-auto"
-            >
+            <div key={`table-${i}`} className="overflow-x-auto">
               <table className="border-collapse border w-full">
                 <tbody>{tableRows}</tbody>
               </table>
-            </motion.div>
+            </div>
           );
           continue;
         }
       }
       // Empty lines
       else if (line.trim() === "") {
-        elements.push(<br key={i} />);
+        elements.push(<br key={`br-${i}`} />);
       }
       // Regular paragraphs with inline formatting
       else {
         let formattedLine = line;
-        // Handle bold and italic
+        // Italic (*text*) but not **text**
         formattedLine = formattedLine.replace(
-          /\*\*(.*?)\*\*/g,
-          "<strong>$1</strong>"
+          /(^|\s)\*(?!\*)([^*]+)\*(?=\s|$)/g,
+          "$1<em>$2</em>"
         );
-        formattedLine = formattedLine.replace(/\*(.*?)\*/g, "<em>$1</em>");
         // Handle inline code
         formattedLine = formattedLine.replace(
           /`([^`]+)`/g,
@@ -733,13 +924,10 @@ function BlogContent({ content }: { content: string }) {
         );
 
         elements.push(
-          <motion.p
-            key={i}
-            className="mb-6 leading-relaxed text-foreground/90"
+          <p
+            key={`p-${i}-${formattedLine.substring(0, 10)}`}
+            className="leading-relaxed text-foreground/90"
             dangerouslySetInnerHTML={{ __html: formattedLine }}
-            initial={{ opacity: 0, y: 5 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
           />
         );
       }
@@ -750,7 +938,5 @@ function BlogContent({ content }: { content: string }) {
     return elements;
   };
 
-  return (
-    <div className="prose prose-lg max-w-none">{formatContent(content)}</div>
-  );
+  return <>{formatContent(content)}</>;
 }
