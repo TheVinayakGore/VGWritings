@@ -13,9 +13,9 @@ export default function NewsletterSignup() {
   };
 
   return (
-    <div className="bg-primary/5 p-8 rounded-xl hover:shadow-lg full">
+    <div className="bg-primary/5 p-5 md:p-8 rounded-md md:rounded-xl hover:shadow-lg full">
       <h2 className="logo text-2xl font-bold mb-2">Subscribe to our Newsletter</h2>
-      <p className="mb-4 text-muted-foreground">
+      <p className="mb-4 text-xs md:text-sm text-muted-foreground">
         Get the latest posts delivered right to your inbox.
       </p>
       {submitted ? (
@@ -33,9 +33,9 @@ export default function NewsletterSignup() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="flex-1 border-primary/30"
+            className="flex-1 p-2 px-4 md:p-5 border-primary/30 text-sm md:text-base"
           />
-          <Button type="submit" className="shrink-0">
+          <Button type="submit" size="lg" className="shrink-0 p-5">
             Subscribe
           </Button>
         </form>

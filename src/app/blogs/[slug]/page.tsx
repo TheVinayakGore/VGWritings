@@ -31,263 +31,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { MdOutlineArrowRightAlt } from "react-icons/md";
-
-const blogData = {
-  "understanding-react-server-components": {
-    id: 1,
-    title: "Understanding React Server Components",
-    description:
-      "A deep dive into React Server Components and how they change the way we build web apps.",
-    date: "June 1, 2024",
-    readTime: "8 min read",
-    cover: "/card.png",
-    stats: {
-      likes: 124,
-      views: 2560,
-    },
-    tags: ["React", "Next.js", "Performance"],
-    content: `
-# 🚀 Understanding React Server Components
-
-React Server Components (RSC) represent a paradigm shift in how we build React applications. They allow us to render components on the server and send the result to the client, reducing the JavaScript bundle size and improving performance.
-
-## 🤔 What are Server Components?
-
-Server Components are React components that run exclusively on the server. They can:
-
-- Access backend resources directly
-- Keep sensitive data on the server
-- Reduce client-side JavaScript
-- Improve initial page load performance
-
-## 🌟 Key Benefits
-
-1. Reduced Bundle Size: Server components don't ship JavaScript to the client
-2. Better Performance: Faster initial page loads
-3. Enhanced Security: Sensitive data stays on the server
-4. Improved SEO: Better server-side rendering
-
-## 🛠️ Example Implementation
-
-Here's a simple example of a server component:
-
-\`\`\`jsx
-// ServerComponent.jsx
-async function ServerComponent() {
-  const data = await fetchDataFromDatabase();
-  
-  return (
-    <div>
-      <h2>Server Data</h2>
-      <ul>
-        {data.map(item => (
-          <li key={item.id}>{item.name}</li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-\`\`\`
-
-## 🔄 Client vs Server Components
-
-| Feature | Client Component | Server Component |
-| JavaScript | Sent to client | Stays on server |
-| Interactivity | Full | Limited |
-| Data fetching | Client-side | Server-side |
-| Bundle size | Larger | Smaller |
-
-## 💡 Best Practices
-
-1. Use Server Components by default
-2. Add "use client" only when needed
-3. Keep interactive parts as client components
-4. Leverage server-side data fetching
-
-## 🎯 Conclusion
-
-React Server Components offer a powerful way to build more efficient React applications. By understanding when and how to use them, you can create faster, more secure web applications.
-
-For more information, check out the [official React documentation](https://react.dev).
-    `,
-    images: ["/trip/01.jpeg", "/trip/02.jpeg", "/trip/03.jpeg"],
-  },
-  "mastering-javascript-closures": {
-    id: 2,
-    title: "Mastering JavaScript Closures",
-    description:
-      "A comprehensive guide to understanding and using closures in JavaScript.",
-    date: "May 15, 2024",
-    readTime: "6 min read",
-    cover: "/trip/01.jpeg",
-    stats: {
-      likes: 98,
-      views: 1800,
-    },
-    tags: ["JavaScript", "Closures", "Fundamentals"],
-    content: `
-# 🧠 Mastering JavaScript Closures
-
-Closures are a fundamental concept in JavaScript that every developer should understand. They allow functions to access variables from an enclosing scope, even after that scope has closed.
-
-## ❓ What is a Closure?
-
-A closure is created when a function is defined inside another function, allowing the inner function to access the outer function's variables.
-
-\`\`\`javascript
-function outer() {
-  let count = 0;
-  function inner() {
-    count++;
-    return count;
-  }
-  return inner;
-}
-const counter = outer();
-console.log(counter()); // 1
-console.log(counter()); // 2
-\`\`\`
-
-## 💡 Why Use Closures?
-
-- Data privacy
-- Function factories
-- Maintaining state
-
-## ⚠️ Common Pitfalls
-
-1. Unintended variable sharing in loops
-2. Memory leaks if not careful
-
-## 🎯 Conclusion
-
-Closures are powerful but can be tricky. Practice using them to fully understand their behavior!`,
-    images: [],
-  },
-  "css-grid-vs-flexbox": {
-    id: 3,
-    title: "CSS Grid vs Flexbox: When to Use Which?",
-    description:
-      "A practical comparison of CSS Grid and Flexbox for modern web layouts.",
-    date: "April 28, 2024",
-    readTime: "7 min read",
-    cover: "/trip/02.jpeg",
-    stats: {
-      likes: 112,
-      views: 2100,
-    },
-    tags: ["CSS", "Grid", "Flexbox"],
-    content: `
-# 🎨 CSS Grid vs Flexbox: When to Use Which?
-
-CSS Grid and Flexbox are two powerful layout systems in CSS. Knowing when to use each can help you build responsive and maintainable layouts.
-
-## 🟩 CSS Grid
-
-- Two-dimensional layout
-- Great for complex grids
-- Explicit placement of items
-
-## ➡️ Flexbox
-
-- One-dimensional layout
-- Best for linear arrangements
-- Simple alignment and distribution
-
-## 🏗️ Example: Grid
-
-\`\`\`css
-grid-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 16px;
-}
-\`\`\`
-
-## 🧩 Example: Flexbox
-
-\`\`\`css
-.flex-container {
-  display: flex;
-  flex-direction: row;
-  gap: 16px;
-}
-\`\`\`
-
-## 🤔 When to Use Which?
-
-- Use Grid for overall page layout
-- Use Flexbox for components and small UI elements
-
-## 🎯 Conclusion
-
-Both Grid and Flexbox are essential tools. Choose the right one based on your layout needs!`,
-    images: ["/trip/04.jpeg", "/trip/05.jpeg"],
-  },
-  "unaccepted-mumbai-trip": {
-    id: 4,
-    title: "Unaccepted Mumbai Trip",
-    description:
-      "A spontaneous and unforgettable journey through the heart of Mumbai, filled with surprises, street food, and city lights.",
-    date: "July 10, 2024",
-    readTime: "10 min read",
-    cover: "/trip/03.jpeg",
-    stats: {
-      likes: 87,
-      views: 1420,
-    },
-    tags: ["Travel", "Mumbai", "Adventure", "India"],
-    images: [
-      "/trip/01.jpeg",
-      "/trip/02.jpeg",
-      "/trip/03.jpeg",
-      "/trip/04.jpeg",
-      "/trip/05.jpeg",
-    ],
-    content: `
-# 🏙️ Unaccepted Mumbai Trip
-
-Sometimes the best adventures are the ones you never planned. My recent trip to Mumbai was exactly that—a spontaneous escape that turned into a whirlwind of discovery, flavors, and memories.
-
-[key-moments]
-
-## 🚆 The Unexpected Departure
-
-It all started with a late-night call from a friend: "Let's go to Mumbai tomorrow!" With barely any time to pack, we hopped on the first available train. The excitement of an unplanned journey was palpable as the city lights faded and the tracks hummed beneath us.
-
-## 🌅 Sunrise at Marine Drive
-
-We arrived in Mumbai just as the sun was rising. The first stop? Marine Drive. The cool breeze, the sound of waves, and the golden light made for a magical welcome. We sat on the promenade, sipping chai from a street vendor, watching the city wake up.
-
-## 🍲 Street Food Extravaganza
-
-Mumbai is a food lover's paradise. From spicy vada pav at a bustling corner stall to sweet jalebis in a crowded market, every bite was an explosion of flavor. We wandered through the lanes of Mohammad Ali Road, sampling kebabs, pav bhaji, and more.
-
-- Vada Pav at Dadar
-- Pav Bhaji at Chowpatty
-- Jalebi at CST
-- Kebabs at Mohammad Ali Road
-- Cutting Chai everywhere!
-
-## 🕌 Gateway of India & Colaba Causeway
-
-No trip to Mumbai is complete without visiting the Gateway of India. The monument stood tall against the blue sky, surrounded by tourists and pigeons. We strolled down Colaba Causeway, picking up quirky souvenirs and chatting with local shopkeepers.
-
-## 🚇 Local Train Adventures
-
-Traveling by Mumbai's local trains is an experience in itself. The rush, the crowd, the energy—it's the lifeblood of the city. We squeezed into a compartment, made new friends, and even got travel tips from daily commuters.
-
-## 🌃 Nightlife & Reflections
-
-As night fell, we explored Bandra's vibrant streets, enjoyed live music at a cozy café, and ended the day with a peaceful walk along Carter Road. Mumbai's energy is infectious, and its spirit stays with you long after you leave.
-
-## 🎯 Conclusion
-
-The Unaccepted Mumbai Trip taught me that sometimes, the best memories come from the journeys you never expected to take. Mumbai, with its chaos and charm, welcomed us with open arms and left us craving more.
-
-If you ever get a chance to visit, say yes—even if you haven't planned a thing!`,
-  },
-};
+import blogData from "@/data/blog-data.json";
 
 export default function BlogPage() {
   const params = useParams();
@@ -379,12 +123,11 @@ export default function BlogPage() {
           <div className="hidden lg:block lg:col-span-3">
             <div className="sticky top-20 pb-5">
               <motion.div whileHover={{ x: -5 }} className="py-3">
-                <Link
-                  href="/blogs"
-                  className="inline-flex items-center text-primary hover:underline"
-                >
-                  <ArrowLeft className="w-4 h-4 mr-2" />
-                  Back to blogs
+                <Link href="/blogs">
+                  <Button className="p-7 text-sm md:text-base w-full">
+                    <ArrowLeft className="size-5 mr-2" />
+                    Back to blogs
+                  </Button>
                 </Link>
               </motion.div>
               <TableOfContents items={tocItems} />
@@ -399,43 +142,43 @@ export default function BlogPage() {
               transition={{ delay: 0.1 }}
             >
               {/* Article Header */}
-              <header className="mb-10">
+              <header className="mb-4 md:mb-10">
                 <Badge
                   variant="outline"
-                  className="flex flex-wrap items-center justify-start gap-2 p-3 mb-6 overflow-auto"
+                  className="flex md:inline-flex flex-wrap items-center justify-start md:gap-2 p-3 mb-3 md:mb-6 overflow-auto w-full md:w-auto"
                 >
-                  <span className="rounded-full text-xl leading-none font-bold px-3">
+                  <span className="rounded-full text-base md:text-lg leading-none font-bold pr-2 md:px-3">
                     ► TAGS
                   </span>
                   {blog.tags.map((tag) => (
                     <Badge
                       key={tag}
-                      className="bg-primary rounded text-base p-1 px-4"
+                      className="bg-primary text-xs md:text-sm p-1 px-3 md:px-4 rounded-full"
                     >
                       {tag}
                     </Badge>
                   ))}
                 </Badge>
 
-                <h1 className="logo text-3xl md:text-4xl lg:text-5xl tracking-wide mb-4">
+                <h1 className="logo text-xl md:text-4xl lg:text-5xl tracking-wide mb-3">
                   {blog.title}
                 </h1>
 
-                <p className="text-lg text-muted-foreground mb-6">
+                <p className="text-sm md:text-lg text-muted-foreground mb-3">
                   {blog.description}
                 </p>
 
                 <div className="flex items-center gap-4 text-sm text-muted-foreground">
                   <div className="flex items-center gap-2">
-                    <Calendar className="h-4 w-4" />
+                    <Calendar className="size-4" />
                     <span>{blog.date}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Clock className="h-4 w-4" />
+                    <Clock className="size-4" />
                     <span>{blog.readTime}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Eye className="h-4 w-4" />
+                    <Eye className="size-4" />
                     <span>{blog.stats.views.toLocaleString()} views</span>
                   </div>
                 </div>
@@ -446,14 +189,14 @@ export default function BlogPage() {
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
-                className="rounded-xl border overflow-hidden shadow-lg"
+                className="rounded-md md:rounded-xl border overflow-hidden shadow-lg"
               >
                 <Image
                   src={blog.cover}
                   alt={blog.title}
                   width={1600}
                   height={900}
-                  className="w-full h-auto object-cover"
+                  className="w-full h-[30rem] object-cover"
                   priority
                 />
               </motion.div>
@@ -463,12 +206,13 @@ export default function BlogPage() {
                 <BlogContent
                   content={blog.content}
                   images={blog.images || []}
+                  keyMomentsData={blog.keyMomentsData || []}
                 />
               </article>
 
               {/* Article Footer */}
-              <footer className="mt-16 border-y py-8">
-                <div className="flex flex-row justify-center sm:justify-between items-center gap-3">
+              <footer className="mt-5 md:mt-16 border-y py-4 md:py-8">
+                <div className="flex flex-row justify-center sm:justify-between items-center gap-4">
                   <div className="flex items-center gap-4">
                     <Button
                       variant={liked ? "default" : "outline"}
@@ -515,13 +259,13 @@ export default function BlogPage() {
             </motion.div>
 
             {/* Newsletter Signup */}
-            <div className="my-10">
+            <div className="my-5 md:my-10">
               <NewsletterSignup />
             </div>
 
             {/* Related Articles */}
-            <section className="mb-16">
-              <h2 className="logo text-2xl md:text-4xl font-bold mb-5 md:mb-10">
+            <section className="mb-6 md:mb-16">
+              <h2 className="logo text-lg md:text-4xl font-bold mb-5 md:mb-10">
                 🚀{" "}
                 <span className="underline underline-offset-8">
                   More articles you might like
@@ -537,7 +281,7 @@ export default function BlogPage() {
                       className="bg-background border rounded-lg overflow-hidden hover:shadow-lg transition-shadow"
                     >
                       <Link href={`/blogs/${key}`} className="block">
-                        <div className="relative h-60 md:h-76 w-full">
+                        <div className="relative h-52 md:h-76 w-full">
                           <Image
                             src={post.cover}
                             alt={post.title}
@@ -545,37 +289,39 @@ export default function BlogPage() {
                             className="object-cover object-top"
                           />
                         </div>
-                        <div className="p-4 sm:p-5">
-                          <div className="flex flex-wrap gap-2 mb-3">
+                        <div>
+                          <div className="flex flex-wrap gap-2 p-3">
                             {post.tags.slice(0, 2).map((tag) => (
                               <Badge
                                 key={tag}
-                                className="bg-primary rounded-full p-1 px-3"
+                                className="text-xs md:text-sm bg-primary rounded-full p-1 px-3"
                               >
                                 {tag}
                               </Badge>
                             ))}
                           </div>
-                          <h3 className="logo text-xl font-bold mb-2">
-                            {post.title}
-                          </h3>
-                          <p className="text-muted-foreground line-clamp-2 mb-4">
-                            {post.description}
-                          </p>
-                          <div className="flex items-center gap-4 text-xs sm:text-sm text-muted-foreground">
-                            <div className="flex items-center gap-2">
-                              <Calendar className="h-3 sm:h-4 w-3 sm:w-4" />
-                              <span>{post.date}</span>
-                            </div>
-                            <div className="flex items-center gap-2">
-                              <Clock className="h-3 sm:h-4 w-3 sm:w-4" />
-                              <span>{post.readTime}</span>
-                            </div>
-                            <div className="flex items-center gap-2">
-                              <Eye className="h-3 sm:h-4 w-3 sm:w-4" />
-                              <span>
-                                {post.stats.views.toLocaleString()} views
-                              </span>
+                          <div className="p-4 pt-0 sm:pt-2">
+                            <h3 className="logo text-lg md:text-xl font-bold mb-2">
+                              {post.title}
+                            </h3>
+                            <p className="text-sm md:text-base text-muted-foreground line-clamp-2 mb-4">
+                              {post.description}
+                            </p>
+                            <div className="flex items-center gap-4 text-xs sm:text-sm text-muted-foreground">
+                              <div className="flex items-center gap-2">
+                                <Calendar className="h-3 sm:h-4 w-3 sm:w-4" />
+                                <span>{post.date}</span>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <Clock className="h-3 sm:h-4 w-3 sm:w-4" />
+                                <span>{post.readTime}</span>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <Eye className="h-3 sm:h-4 w-3 sm:w-4" />
+                                <span>
+                                  {post.stats.views.toLocaleString()} views
+                                </span>
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -629,18 +375,28 @@ export default function BlogPage() {
   );
 }
 
-function KeyMoments({ images }: { images: string[] }) {
+function KeyMoments({
+  images,
+  keyMomentsData,
+}: {
+  images: string[];
+  keyMomentsData: { image: string; title: string; description: string }[];
+}) {
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState<string | null>(null);
+  const [selectedDescription, setSelectedDescription] = useState<string>("");
+  const [selectedTitle, setSelectedTitle] = useState<string>(
+    "🤩 Captured moments"
+  );
 
   if (!Array.isArray(images) || images.length === 0) return null;
 
   return (
-    <section className="mb-8 overflow-x-auto w-full">
+    <section className="overflow-x-auto w-full">
       <h3 className="font-semibold text-lg mb-2"># Key Moments :</h3>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger
-          className="flex gap-5 overflow-x-auto p-5 md:p-10 md:pt-5 scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-primary/30"
+          className="flex gap-3 overflow-x-auto p-5 md:p-10 md:pt-5 scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-primary/30"
           asChild
         >
           <div>
@@ -648,9 +404,21 @@ function KeyMoments({ images }: { images: string[] }) {
               <button
                 key={img + idx}
                 type="button"
-                className="shrink-0 w-32 md:w-56 h-auto p-2 border rounded-lg hover:shadow-lg transition-all hover:scale-105 duration-300 overflow-hidden bg-muted cursor-pointer"
+                className="shrink-0 md:mt-3 -rotate-6 z-0 hover:rotate-0 hover:z-10 w-auto h-40 md:h-64 p-1 md:p-1.5 border rounded md:rounded-md hover:shadow-lg transition-all hover:scale-110 duration-300 overflow-hidden bg-muted cursor-pointer"
                 onClick={() => {
                   setSelected(img);
+                  const momentData = keyMomentsData.find(
+                    (moment) => moment.image === img
+                  );
+                  setSelectedDescription(
+                    momentData?.description ||
+                      "A memorable moment from the journey !"
+                  );
+                  setSelectedTitle(
+                    momentData?.title
+                      ? `${momentData.title}`
+                      : "🤩 Captured moments"
+                  );
                   setOpen(true);
                 }}
               >
@@ -659,17 +427,19 @@ function KeyMoments({ images }: { images: string[] }) {
                   alt={`Key moment ${idx + 1}`}
                   width={2000}
                   height={2000}
-                  className="object-cover rounded-lg w-full h-full"
+                  className="object-cover rounded md:rounded-md w-full h-full"
                 />
               </button>
             ))}
           </div>
         </DialogTrigger>
-        <DialogContent className="mt-16 md:mt-10 max-h-[80vh] w-full overflow-auto">
+        <DialogContent className="mt-16 md:mt-10 p-1.5 md:p-6 max-h-[80vh] overflow-auto">
           <DialogHeader>
-            <DialogTitle>Captured moments</DialogTitle>
-            <DialogDescription>
-              A memorable moment from the journey.
+            <DialogTitle className="text-lg md:text-xl">
+              {selectedTitle}
+            </DialogTitle>
+            <DialogDescription className="text-sm md:text-base leading-relaxed">
+              {selectedDescription}
             </DialogDescription>
           </DialogHeader>
           {selected && (
@@ -678,7 +448,7 @@ function KeyMoments({ images }: { images: string[] }) {
               alt="Large key moment"
               width={1200}
               height={800}
-              className="rounded-lg w-full h-full"
+              className="rounded-md md:rounded-lg w-full h-full"
             />
           )}
         </DialogContent>
@@ -690,9 +460,11 @@ function KeyMoments({ images }: { images: string[] }) {
 function BlogContent({
   content,
   images,
+  keyMomentsData,
 }: {
   content: string;
   images: string[];
+  keyMomentsData: { image: string; title: string; description: string }[];
 }) {
   const formatContent = (content: string) => {
     const lines = content.split("\n");
@@ -704,7 +476,13 @@ function BlogContent({
 
       // Key Moments shortcode
       if (line.trim() === "[key-moments]") {
-        elements.push(<KeyMoments key={`key-moments-${i}`} images={images} />);
+        elements.push(
+          <KeyMoments
+            key={`key-moments-${i}`}
+            images={images}
+            keyMomentsData={keyMomentsData}
+          />
+        );
         i++;
         continue;
       }
@@ -715,7 +493,7 @@ function BlogContent({
           <h1
             key={i}
             id={line.substring(2).toLowerCase().replace(/\s+/g, "-")}
-            className="text-3xl font-bold mt-5 scroll-m-20"
+            className="text-xl md:text-3xl font-bold mt-2 md:mt-5 md:scroll-m-20"
           >
             {line.substring(2)}
           </h1>
@@ -725,7 +503,7 @@ function BlogContent({
           <h2
             key={i}
             id={line.substring(3).toLowerCase().replace(/\s+/g, "-")}
-            className="text-2xl font-bold scroll-m-20"
+            className="text-lg md:text-2xl font-bold scroll-m-20"
           >
             {line.substring(3)}
           </h2>
@@ -735,7 +513,7 @@ function BlogContent({
           <h3
             key={i}
             id={line.substring(4).toLowerCase().replace(/\s+/g, "-")}
-            className="text-xl font-bold scroll-m-20"
+            className="text-base md:text-xl font-bold scroll-m-20"
           >
             {line.substring(4)}
           </h3>
@@ -745,7 +523,7 @@ function BlogContent({
           <h4
             key={i}
             id={line.substring(5).toLowerCase().replace(/\s+/g, "-")}
-            className="text-lg font-bold scroll-m-20"
+            className="text-sm md:text-lg font-bold scroll-m-20"
           >
             {line.substring(5)}
           </h4>
@@ -755,7 +533,7 @@ function BlogContent({
           <h5
             key={i}
             id={line.substring(6).toLowerCase().replace(/\s+/g, "-")}
-            className="text-base font-bold scroll-m-20"
+            className="text-xs md:text-base font-bold scroll-m-20"
           >
             {line.substring(6)}
           </h5>
@@ -785,9 +563,9 @@ function BlogContent({
         const listItems = [
           <li
             key={`li-${i}-${line.substring(2, 10)}`}
-            className="ml-4 mb-1 flex items-center gap-2"
+            className="ml-2 md:ml-4 mb-1 flex items-center gap-2"
           >
-            <CheckCircle className="w-4 h-4 text-green-500 inline-block" />
+            <CheckCircle className="size-3 md:size-5 text-green-500 inline-block" />
             {line.substring(2)}
           </li>,
         ];
@@ -797,9 +575,9 @@ function BlogContent({
           listItems.push(
             <li
               key={`li-${i}-${lines[i].substring(2, 10)}`}
-              className="ml-4 mb-1 flex items-center gap-2"
+              className="ml-2 md:ml-4 mb-1 flex items-center gap-2"
             >
-              <CheckCircle className="w-4 h-4 text-green-500 inline-block" />
+              <CheckCircle className="size-3 md:size-5 text-green-500 inline-block" />
               {lines[i].substring(2)}
             </li>
           );
@@ -807,14 +585,20 @@ function BlogContent({
         }
 
         elements.push(
-          <ul key={`ul-${i}-${listItems.length}`} className="pl-4 list-disc">
+          <ul
+            key={`ul-${i}-${listItems.length}`}
+            className="pl-2 md:pl-4 list-disc"
+          >
             {listItems}
           </ul>
         );
         continue;
       } else if (line.startsWith("1. ")) {
         const listItems = [
-          <li key={`oli-${i}-${line.substring(3, 10)}`} className="ml-4 mb-1">
+          <li
+            key={`oli-${i}-${line.substring(3, 10)}`}
+            className="ml-2 md:ml-4 mb-1"
+          >
             {line.substring(3)}
           </li>,
         ];
@@ -826,7 +610,7 @@ function BlogContent({
               key={`oli-${i}-${lines[i]
                 .replace(/^\d+\.\s/, "")
                 .substring(0, 10)}`}
-              className="ml-4 mb-1"
+              className="ml-2 md:ml-4 mb-1"
             >
               {lines[i].replace(/^\d+\.\s/, "")}
             </li>
@@ -835,7 +619,10 @@ function BlogContent({
         }
 
         elements.push(
-          <ol key={`ol-${i}-${listItems.length}`} className="pl-4 list-decimal">
+          <ol
+            key={`ol-${i}-${listItems.length}`}
+            className="pl-2 md:pl-4 list-decimal"
+          >
             {listItems}
           </ol>
         );
@@ -926,7 +713,7 @@ function BlogContent({
         elements.push(
           <p
             key={`p-${i}-${formattedLine.substring(0, 10)}`}
-            className="leading-relaxed text-foreground/90"
+            className="text-xs md:text-base -my-3 sm:my-0 leading-relaxed text-foreground/80 pb-3 md:pb-6 border-b"
             dangerouslySetInnerHTML={{ __html: formattedLine }}
           />
         );

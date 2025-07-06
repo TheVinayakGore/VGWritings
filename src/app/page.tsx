@@ -13,11 +13,11 @@ export default function Home() {
 
         <CareerGrowth />
 
-        <LearninigPosts />
+        <MyTravels />
 
         <AboutSection />
 
-        <MyTravels />
+        <LearninigPosts />
 
         <NewsletterSection />
       </main>

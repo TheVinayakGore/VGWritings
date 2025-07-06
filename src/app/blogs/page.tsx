@@ -149,22 +149,21 @@ export default function BlogsPage() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.1 }}
-        className="flex flex-col md:flex-row items-center justify-between gap-4 mb-12"
+        className="flex flex-col md:flex-row items-center relative mb-12 max-w-3xl mx-auto w-full"
       >
-        <div className="relative w-full">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+        <div className="w-full">
+          <Search className="absolute left-6 top-1/2 transform -translate-y-1/2 size-7 text-muted-foreground" />
           <Input
             type="text"
             placeholder="Search blogs by title, description or tags..."
             value={searchQuery}
             onChange={handleSearchChange}
-            className="pl-10 w-full"
+            className="pl-16 py-8 xl:text-xl placeholder:text-xl rounded-full w-full"
           />
         </div>
-        <Link href="/blogs/add" className="w-full md:w-auto">
-          <Button className="w-full">
-            <Plus className="w-4 h-4 mr-2" />
-            Create New Blog
+        <Link href="/blogs/add" className="absolute right-0">
+          <Button size="icon" className="p-8 hover:shadow-md rounded-full">
+            <Plus className="size-7" />
           </Button>
         </Link>
       </motion.div>
@@ -186,18 +185,18 @@ export default function BlogsPage() {
             >
               <Link href={`/blogs/${blog.slug}`}>
                 <Card className="h-full flex flex-col overflow-hidden pt-0 group hover:shadow-lg transition-shadow duration-300">
-                  <div className="relative aspect-video border-b overflow-hidden min-h-96">
+                  <div className="relative aspect-video border-b overflow-hidden min-h-60">
                     <Image
                       src={blog.cover}
                       alt={blog.title}
                       width={2000}
                       height={2000}
-                      className="object-cover object-top group-hover:scale-105 transition-transform duration-500 min-h-96"
+                      className="object-cover object-top group-hover:scale-105 transition-transform duration-500 min-h-60"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                     <div className="absolute top-4 left-4 flex flex-wrap gap-2">
                       {blog.tags.map((tag) => (
-                        <Badge key={tag} variant="secondary">
+                        <Badge key={tag} variant="secondary" className="text-xs md:text-sm px-3">
                           {tag}
                         </Badge>
                       ))}
