@@ -1,4 +1,5 @@
 "use client";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import {
   Card,
@@ -9,75 +10,61 @@ import {
 } from "./ui/card";
 import Link from "next/link";
 import { Button } from "./ui/button";
+import toast from "react-hot-toast";
+import { client } from "@/sanity/lib/client";
+import { PortableTextBlock } from "@portabletext/types";
+import { format } from "date-fns";
 
-const learninigPosts = [
-  {
-    id: 1,
-    title: "The Art of Creative Writing",
-    description:
-      "Explore techniques to enhance your creative writing skills and captivate your readers.",
-    category: "Writing",
-    date: "May 15, 2023",
-  },
-  {
-    id: 2,
-    title: "Modern Web Development Trends",
-    description:
-      "Discover the latest trends shaping the future of web development in 2023.",
-    category: "Technology",
-    date: "June 2, 2023",
-  },
-  {
-    id: 3,
-    title: "Mindfulness and Productivity",
-    description:
-      "How practicing mindfulness can significantly boost your productivity and focus.",
-    category: "Lifestyle",
-    date: "April 28, 2023",
-  },
-  {
-    id: 4,
-    title: "Building a Personal Brand Online",
-    description:
-      "Tips and strategies to establish and grow your personal brand in the digital world.",
-    category: "Personal Growth",
-    date: "July 10, 2023",
-  },
-  {
-    id: 5,
-    title: "Effective Time Management for Creators",
-    description:
-      "Master the art of time management to balance creativity and productivity.",
-    category: "Productivity",
-    date: "August 5, 2023",
-  },
-  {
-    id: 6,
-    title: "Travel Diaries: Exploring the Himalayas",
-    description:
-      "A personal account of adventures and lessons learned while trekking in the Himalayas.",
-    category: "Travel",
-    date: "September 12, 2023",
-  },
-  {
-    id: 7,
-    title: "The Science of Habit Formation",
-    description:
-      "Understand how habits are formed and how to build positive routines for success.",
-    category: "Self-Improvement",
-    date: "October 1, 2023",
-  },
-  {
-    id: 8,
-    title: "AI in Everyday Life: Opportunities & Challenges",
-    description:
-      "Explore how artificial intelligence is transforming daily life and what the future holds.",
-    category: "Technology",
-    date: "November 18, 2023",
-  },
-];
+type LearningPost = {
+  _id: string;
+  title: string;
+  category: string;
+  date: string;
+  content: PortableTextBlock[];
+  slug: {
+    current: string; // Ensure slug has a current property
+  };
+  tags: string[];
+};
 
-export default function LearninigPosts() {
+export default function LearningPosts() {
+  const [learning, setLearning] = useState<LearningPost[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchLearning = async () => {
+      const query = `*[_type == "learning"]{
+        _id,
+        title,
+        category,
+        date,
+        content,
+        slug,
+        tags[],
+      }`;
+      try {
+        const result = await client.fetch(query);
+        setLearning(result);
+      } catch (error) {
+        toast.error("Error fetching learning content: " + error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchLearning();
+  }, []);
+
+  if (loading) {
+    return <div className="py-20 px-4 text-center">Loading...</div>;
+  }
+
+  if (!learning || learning.length === 0) {
+    return (
+      <div className="py-20 px-4 text-center">No Learning content found</div>
+    );
+  }
+
   return (
     <section
       id="featured"
@@ -92,7 +79,7 @@ export default function LearninigPosts() {
           className="text-center mb-12"
         >
           <h2 className="logo text-4xl md:text-6xl font-bold mb-5">
-            Learninig Posts
+            Learning Posts
           </h2>
           <p className="text-lg text-foreground/80 max-w-2xl mx-auto">
             Discover our most popular and recently published articles
@@ -100,9 +87,9 @@ export default function LearninigPosts() {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {learninigPosts.map((post, index) => (
+          {learning.map((item, index) => (
             <motion.div
-              key={post.id}
+              key={item._id}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -112,17 +99,38 @@ export default function LearninigPosts() {
               <Card className="h-full flex flex-col transition-shadow hover:shadow-lg">
                 <CardHeader>
                   <span className="text-sm text-primary font-medium">
-                    {post.category}
+                    {item.category}
                   </span>
-                  <CardTitle className="text-xl">{post.title}</CardTitle>
-                  <CardDescription>{post.date}</CardDescription>
+                  <CardTitle className="text-xl">{item.title}</CardTitle>
+                  <CardDescription>
+                    {" "}
+                    {item.date
+                      ? format(new Date(item.date), "MMM dd, yyyy")
+                      : "No Date"}
+                  </CardDescription>
                 </CardHeader>
                 <CardContent className="flex-grow">
-                  <p className="text-foreground/80 mb-4">{post.description}</p>
+                  {item.content
+                    .filter(
+                      (block: PortableTextBlock) =>
+                        block._type === "block" && block.style === "normal"
+                    )
+                    .map((block: PortableTextBlock) =>
+                      (block.children as { text: string }[])
+                        .map((c) => c.text)
+                        .join(" ")
+                    )
+                    .join(" ")
+                    .slice(0, 100)}...
                 </CardContent>
                 <div className="px-6 pb-6">
                   <Button asChild variant="outline">
-                    <Link href={`/blog/${post.id}`}>Read More</Link>
+                    <Link
+                      href={`/learning/${item.slug.current}`}
+                      target="_blank"
+                    >
+                      Read More
+                    </Link>
                   </Button>
                 </div>
               </Card>

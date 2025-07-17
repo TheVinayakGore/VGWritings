@@ -26,6 +26,16 @@ export default function CodeBlock({
   const [mounted, setMounted] = useState(false);
   const [copied, setCopied] = useState(false);
 
+  // Ensure code is always a string and trimmed
+  let codeString = "";
+  if (typeof children === "string") {
+    codeString = children;
+  } else if (Array.isArray(children)) {
+    codeString = (children as string[]).join("");
+  }
+  codeString = codeString.trim();
+  const prismLanguage = language || "javascript";
+
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -34,11 +44,11 @@ export default function CodeBlock({
     if (mounted && codeRef.current) {
       Prism.highlightElement(codeRef.current);
     }
-  }, [children, language, mounted]);
+  }, [codeString, prismLanguage, mounted]);
 
   const handleCopy = async () => {
     if (codeRef.current) {
-      await navigator.clipboard.writeText(children);
+      await navigator.clipboard.writeText(codeString);
       setCopied(true);
       setTimeout(() => setCopied(false), 1500);
     }
@@ -48,8 +58,8 @@ export default function CodeBlock({
   return (
     <div className="relative px-1.5 border rounded-lg bg-primary/5 hover:shadow-lg transition-all hover:scale-105 duration-300">
       <pre className={`overflow-x-auto rounded-lg ${className}`}>
-        <code ref={codeRef} className={`language-${language}`}>
-          {children}
+        <code ref={codeRef} className={`language-${prismLanguage}`}>
+          {codeString}
         </code>
       </pre>
       <button
